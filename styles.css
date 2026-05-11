@@ -185,6 +185,44 @@ ul {
     padding: 0 20px;
 }
 
+/* ===== HERO LOGO ===== */
+.hero-logo-container {
+    margin-bottom: 30px;
+    animation: logoFloat 3s ease-in-out infinite;
+}
+
+.hero-logo {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 30px rgba(255, 0, 102, 0.6)) 
+            drop-shadow(0 0 60px rgba(0, 204, 255, 0.4));
+    animation: logoPulse 2s ease-in-out infinite;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    padding: 10px;
+}
+
+@keyframes logoFloat {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes logoPulse {
+    0%, 100% {
+        filter: drop-shadow(0 0 30px rgba(255, 0, 102, 0.6)) 
+                drop-shadow(0 0 60px rgba(0, 204, 255, 0.4));
+    }
+    50% {
+        filter: drop-shadow(0 0 40px rgba(255, 0, 102, 0.8)) 
+                drop-shadow(0 0 80px rgba(0, 204, 255, 0.6));
+    }
+}
+
 .glitch {
     font-size: clamp(2.5rem, 8vw, 5rem);
     font-weight: 900;
@@ -1829,6 +1867,11 @@ section {
         grid-template-columns: 1fr;
         padding: 40px 30px;
     }
+    
+    .hero-logo {
+        width: 140px;
+        height: 140px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1857,6 +1900,15 @@ section {
     
     .contact-form {
         padding: 25px;
+    }
+    
+    .hero-logo {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .hero-logo-container {
+        margin-bottom: 20px;
     }
 }
 
