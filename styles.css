@@ -140,44 +140,68 @@ ul {
     transition: var(--transition);
 }
 
-/* ===== NEON GLOW LOGO ===== */
+/* ===== ENERGY SHIELD LOGO ===== */
 .hero-logo-container {
     margin-bottom: 40px;
     position: relative;
-    animation: logoEntrance 1.5s ease-out;
+    animation: logoEntrance 2s ease-out;
 }
 
+/* Multiple energy rings */
 .hero-logo-container::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    right: -30px;
+    bottom: -30px;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    animation: energyRing1 3s ease-in-out infinite;
+    opacity: 0;
+}
+
+.hero-logo-container::after {
     content: '';
     position: absolute;
     top: -20px;
     left: -20px;
     right: -20px;
     bottom: -20px;
-    background: transparent;
-    border: 3px solid var(--primary-color);
-    border-radius: 50%;
-    animation: neonPulse 2s ease-in-out infinite, borderSpin 8s linear infinite;
-    box-shadow: 
-        0 0 20px var(--primary-color),
-        0 0 40px var(--primary-color),
-        inset 0 0 20px var(--primary-color);
-}
-
-.hero-logo-container::after {
-    content: '';
-    position: absolute;
-    top: -15px;
-    left: -15px;
-    right: -15px;
-    bottom: -15px;
-    background: transparent;
     border: 2px solid var(--secondary-color);
     border-radius: 50%;
-    animation: neonPulse 2s ease-in-out infinite reverse, borderSpin 6s linear infinite reverse;
-    box-shadow: 
-        0 0 15px var(--secondary-color),
-        0 0 30px var(--secondary-color);
+    animation: energyRing2 3s ease-in-out infinite;
+    opacity: 0;
+}
+
+@keyframes energyRing1 {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+        box-shadow: 0 0 30px var(--primary-color);
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+@keyframes energyRing2 {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+        box-shadow: 0 0 30px var(--secondary-color);
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
 }
 
 .hero-logo {
@@ -185,30 +209,42 @@ ul {
     height: 200px;
     object-fit: contain;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(26, 26, 26, 0.9), rgba(10, 10, 10, 0.95));
+    background: 
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1), transparent 60%),
+        radial-gradient(circle, rgba(255, 0, 102, 0.2), rgba(0, 204, 255, 0.2));
     padding: 20px;
     position: relative;
     z-index: 2;
-    animation: logoFloat 3s ease-in-out infinite;
-    filter: drop-shadow(0 0 30px rgba(255, 0, 102, 0.8));
+    animation: logoSpin 10s linear infinite, logoBreath 3s ease-in-out infinite;
+    border: 3px solid transparent;
+    background-clip: padding-box;
     box-shadow: 
-        0 0 50px rgba(255, 0, 102, 0.6),
-        0 0 100px rgba(0, 204, 255, 0.4),
-        inset 0 0 30px rgba(255, 255, 255, 0.1);
+        0 0 40px rgba(255, 0, 102, 0.6),
+        0 0 80px rgba(0, 204, 255, 0.4),
+        0 0 120px rgba(255, 0, 102, 0.2),
+        inset 0 0 40px rgba(255, 255, 255, 0.1),
+        inset 0 0 20px rgba(255, 0, 102, 0.3);
+    filter: drop-shadow(0 0 50px rgba(255, 0, 102, 0.5));
 }
 
-@keyframes neonPulse {
-    0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.7;
-        transform: scale(1.05);
-    }
+/* Add rotating border gradient */
+.hero-logo::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: conic-gradient(
+        from 0deg,
+        var(--primary-color),
+        var(--secondary-color),
+        #ff6600,
+        var(--primary-color)
+    );
+    z-index: -1;
+    animation: borderSpin 4s linear infinite;
 }
 
-@keyframes borderSpin {
+@keyframes logoSpin {
     from {
         transform: rotate(0deg);
     }
@@ -217,27 +253,52 @@ ul {
     }
 }
 
-@keyframes logoEntrance {
-    0% {
-        opacity: 0;
-        transform: scale(0) rotate(-180deg);
+@keyframes logoBreath {
+    0%, 100% {
+        box-shadow: 
+            0 0 40px rgba(255, 0, 102, 0.6),
+            0 0 80px rgba(0, 204, 255, 0.4),
+            0 0 120px rgba(255, 0, 102, 0.2),
+            inset 0 0 40px rgba(255, 255, 255, 0.1);
     }
-    60% {
-        transform: scale(1.2) rotate(10deg);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1) rotate(0deg);
+    50% {
+        box-shadow: 
+            0 0 60px rgba(255, 0, 102, 0.9),
+            0 0 120px rgba(0, 204, 255, 0.6),
+            0 0 180px rgba(255, 0, 102, 0.4),
+            inset 0 0 60px rgba(255, 255, 255, 0.2);
     }
 }
 
-@keyframes logoFloat {
-    0%, 100% {
-        transform: translateY(0px);
+@keyframes borderSpin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes logoEntrance {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+        filter: blur(20px);
     }
     50% {
-        transform: translateY(-20px);
+        transform: scale(1.2);
     }
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(360deg);
+        filter: blur(0);
+    }
+}
+
+.hero-logo:hover {
+    animation-play-state: paused;
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 80px rgba(255, 0, 102, 0.9));
 }
 
 /* ===== BUTTONS ===== */
