@@ -34,7 +34,7 @@ Affiliated with **Suro Bharti Sangeet Kala Kendra**.
 - 📲 **Social Media Integration** — Instagram, Facebook, YouTube & Gmail links
 - 🍔 **Mobile Navigation** — Hamburger menu for smaller screens
 - ⏳ **Loading Screen** — Animated loader on page entry
-- 🖼️ **Custom Logo** — Brand logo displayed in navbar & hero section
+- 🖼️ **Custom Logo** — Brand logo displayed in navbar section
 
 ---
 
