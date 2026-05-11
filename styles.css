@@ -140,99 +140,36 @@ ul {
     transition: var(--transition);
 }
 
-/* ===== ENERGY SHIELD LOGO ===== */
+/* ===== HERO LOGO - ENHANCED VERSION ===== */
 .hero-logo-container {
     margin-bottom: 40px;
     position: relative;
-    animation: logoEntrance 2s ease-out;
+    animation: logoEntrance 1.5s ease-out;
 }
 
-/* Multiple energy rings */
+/* Logo entrance animation */
+@keyframes logoEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(-100px) scale(0.5) rotate(-180deg);
+    }
+    60% {
+        transform: translateY(10px) scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0deg);
+    }
+}
+
+/* Rotating gradient border around logo */
 .hero-logo-container::before {
     content: '';
     position: absolute;
-    top: -30px;
-    left: -30px;
-    right: -30px;
-    bottom: -30px;
-    border: 2px solid var(--primary-color);
-    border-radius: 50%;
-    animation: energyRing1 3s ease-in-out infinite;
-    opacity: 0;
-}
-
-.hero-logo-container::after {
-    content: '';
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    right: -20px;
-    bottom: -20px;
-    border: 2px solid var(--secondary-color);
-    border-radius: 50%;
-    animation: energyRing2 3s ease-in-out infinite;
-    opacity: 0;
-}
-
-@keyframes energyRing1 {
-    0% {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-        box-shadow: 0 0 30px var(--primary-color);
-    }
-    100% {
-        transform: scale(1.5);
-        opacity: 0;
-    }
-}
-
-@keyframes energyRing2 {
-    0% {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-        box-shadow: 0 0 30px var(--secondary-color);
-    }
-    100% {
-        transform: scale(1.5);
-        opacity: 0;
-    }
-}
-
-.hero-logo {
-    width: 200px;
-    height: 200px;
-    object-fit: contain;
-    border-radius: 50%;
-    background: 
-        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1), transparent 60%),
-        radial-gradient(circle, rgba(255, 0, 102, 0.2), rgba(0, 204, 255, 0.2));
-    padding: 20px;
-    position: relative;
-    z-index: 2;
-    animation: logoSpin 10s linear infinite, logoBreath 3s ease-in-out infinite;
-    border: 3px solid transparent;
-    background-clip: padding-box;
-    box-shadow: 
-        0 0 40px rgba(255, 0, 102, 0.6),
-        0 0 80px rgba(0, 204, 255, 0.4),
-        0 0 120px rgba(255, 0, 102, 0.2),
-        inset 0 0 40px rgba(255, 255, 255, 0.1),
-        inset 0 0 20px rgba(255, 0, 102, 0.3);
-    filter: drop-shadow(0 0 50px rgba(255, 0, 102, 0.5));
-}
-
-/* Add rotating border gradient */
-.hero-logo::before {
-    content: '';
-    position: absolute;
-    inset: -3px;
-    border-radius: 50%;
+    top: -15px;
+    left: -15px;
+    right: -15px;
+    bottom: -15px;
     background: conic-gradient(
         from 0deg,
         var(--primary-color),
@@ -240,11 +177,27 @@ ul {
         #ff6600,
         var(--primary-color)
     );
+    border-radius: 50%;
+    animation: borderRotate 4s linear infinite;
     z-index: -1;
-    animation: borderSpin 4s linear infinite;
+    opacity: 0.8;
 }
 
-@keyframes logoSpin {
+/* Inner glow ring */
+.hero-logo-container::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    background: radial-gradient(circle, rgba(255, 0, 102, 0.4), transparent 70%);
+    border-radius: 50%;
+    animation: pulseGlow 2s ease-in-out infinite;
+    z-index: -1;
+}
+
+@keyframes borderRotate {
     from {
         transform: rotate(0deg);
     }
@@ -253,52 +206,137 @@ ul {
     }
 }
 
-@keyframes logoBreath {
+@keyframes pulseGlow {
     0%, 100% {
-        box-shadow: 
-            0 0 40px rgba(255, 0, 102, 0.6),
-            0 0 80px rgba(0, 204, 255, 0.4),
-            0 0 120px rgba(255, 0, 102, 0.2),
-            inset 0 0 40px rgba(255, 255, 255, 0.1);
+        opacity: 0.6;
+        transform: scale(1);
     }
     50% {
-        box-shadow: 
-            0 0 60px rgba(255, 0, 102, 0.9),
-            0 0 120px rgba(0, 204, 255, 0.6),
-            0 0 180px rgba(255, 0, 102, 0.4),
-            inset 0 0 60px rgba(255, 255, 255, 0.2);
-    }
-}
-
-@keyframes borderSpin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(-360deg);
-    }
-}
-
-@keyframes logoEntrance {
-    0% {
-        opacity: 0;
-        transform: scale(0) rotate(0deg);
-        filter: blur(20px);
-    }
-    50% {
-        transform: scale(1.2);
-    }
-    100% {
         opacity: 1;
-        transform: scale(1) rotate(360deg);
-        filter: blur(0);
+        transform: scale(1.1);
     }
 }
 
+/* The actual logo image */
+.hero-logo {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at 30% 30%,
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 0, 102, 0.1) 50%,
+        transparent 70%
+    );
+    padding: 15px;
+    position: relative;
+    z-index: 2;
+    animation: logoFloat 3s ease-in-out infinite, logoShine 3s ease-in-out infinite;
+    box-shadow: 
+        0 0 40px rgba(255, 0, 102, 0.5),
+        0 0 80px rgba(0, 204, 255, 0.3),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Floating animation */
+@keyframes logoFloat {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-12px) rotate(2deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(0deg);
+    }
+    75% {
+        transform: translateY(-12px) rotate(-2deg);
+    }
+}
+
+/* Shimmer/shine effect */
+@keyframes logoShine {
+    0%, 100% {
+        filter: 
+            drop-shadow(0 0 30px rgba(255, 0, 102, 0.6)) 
+            drop-shadow(0 0 60px rgba(0, 204, 255, 0.4))
+            brightness(1);
+    }
+    50% {
+        filter: 
+            drop-shadow(0 0 50px rgba(255, 0, 102, 0.9)) 
+            drop-shadow(0 0 100px rgba(0, 204, 255, 0.6))
+            brightness(1.2);
+    }
+}
+
+/* Hover effect on logo */
 .hero-logo:hover {
     animation-play-state: paused;
-    transform: scale(1.15);
-    filter: drop-shadow(0 0 80px rgba(255, 0, 102, 0.9));
+    transform: scale(1.15) rotate(5deg);
+    box-shadow: 
+        0 0 60px rgba(255, 0, 102, 0.8),
+        0 0 120px rgba(0, 204, 255, 0.5),
+        inset 0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+/* Particle effect around logo */
+.hero-logo-container .particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    animation: particleFloat 3s ease-in-out infinite;
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+@keyframes particleFloat {
+    0%, 100% {
+        transform: translate(0, 0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Responsive logo sizes */
+@media (max-width: 768px) {
+    .hero-logo {
+        width: 160px;
+        height: 160px;
+    }
+    
+    .hero-logo-container::before,
+    .hero-logo-container::after {
+        top: -12px;
+        left: -12px;
+        right: -12px;
+        bottom: -12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-logo {
+        width: 130px;
+        height: 130px;
+        padding: 10px;
+    }
+    
+    .hero-logo-container {
+        margin-bottom: 25px;
+    }
+    
+    .hero-logo-container::before,
+    .hero-logo-container::after {
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+    }
 }
 
 /* ===== BUTTONS ===== */
