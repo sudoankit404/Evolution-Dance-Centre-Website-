@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Evolution Dance Centre</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo-section">
+                <img src="logo.png" alt="Evolution Dance Centre Logo">
+                <span>EVOLUTION DANCE CENTRE</span>
+            </div>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="classes.html">CLASSES</a></li>
+                <li><a href="portfolio.html">PORTFOLIO</a></li>
+                <li><a href="wedding.html">WEDDING</a></li>
+                <li><a href="contact.html" class="active">CONTACT</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>CONTACT <span>US</span></h1>
+        <p>Get in Touch With Us</p>
+    </div>
+
+    <section class="content-section">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-form">
+                    <h2 style="font-size: 2rem; margin-bottom: 2rem; color: var(--primary);">Send us a Message</h2>
+                    <form action="mailto:edceternals@gmail.com" method="POST" enctype="text/plain">
+                        <div class="form-group">
+                            <label for="name">Your Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject *</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="Class Inquiry">Class Inquiry</option>
+                                <option value="Wedding Choreography">Wedding Choreography</option>
+                                <option value="Trial Class">Free Trial Class</option>
+                                <option value="General Inquiry">General Inquiry</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">SEND MESSAGE</button>
+                    </form>
+                </div>
+
+                <div class="contact-info-grid">
+                    <div class="info-card">
+                        <div class="info-icon">📞</div>
+                        <h3>Phone</h3>
+                        <a href="tel:+919971711243">Aakash: +91 99717 11243</a>
+                        <a href="tel:+917678358116">Naina: +91 76783 58116</a>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">✉️</div>
+                        <h3>Email</h3>
+                        <a href="mailto:edceternals@gmail.com">edceternals@gmail.com</a>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">📍</div>
+                        <h3>Location</h3>
+                        <p>E-100, Jeewan Park, Uttam Nagar, New Delhi - 110059, India</p>
+                        <a href="https://maps.app.goo.gl/cfJKi5iW6E18Kwmt6?g_st=ic" target="_blank" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">VIEW ON MAP</a>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon">🕐</div>
+                        <h3>Hours</h3>
+                        <p>Monday - Saturday: 9:00 AM - 9:00 PM</p>
+                        <p>Sunday: 10:00 AM - 6:00 PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section" style="background: linear-gradient(135deg, rgba(255, 107, 0, 0.05), rgba(255, 165, 0, 0.05)); padding: 0;">
+        <div class="map-container">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.0464826395716!2d77.04906931508052!3d28.62337098242089!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1b1b1b1b1b1b%3A0x1b1b1b1b1b1b1b1b!2sUttam%20Nagar%2C%20New%20Delhi%2C%20Delhi!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
+                allowfullscreen 
+                loading="lazy">
+            </iframe>
+        </div>
+    </section>
+
+    <section style="padding: 3rem 2rem; text-align: center;">
+        <div class="container">
+            <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">Follow Us on Social Media</h2>
+            <div class="social-links" style="justify-content: center;">
+                <a href="https://www.facebook.com/share/1BMeq9kMNm/?mibextid=wwXIfr" target="_blank" style="width: 60px; height: 60px; font-size: 1.5rem;">f</a>
+                <a href="https://www.instagram.com/evolutiondance_centre?igsh=aGJnZWt2N3cwN3Jk" target="_blank" style="width: 60px; height: 60px; font-size: 1.5rem;">📷</a>
+                <a href="https://youtube.com/@edceternals-g3i?si=o3Gl9xt_s5TvM05G" target="_blank" style="width: 60px; height: 60px; font-size: 1.5rem;">▶</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <img src="logo.png" alt="Evolution Dance Centre" class="footer-logo">
+                <p style="color: #999; margin-bottom: 1rem;">Delhi's premier dance academy offering world-class training in multiple dance forms.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/share/1BMeq9kMNm/?mibextid=wwXIfr" target="_blank">f</a>
+                    <a href="https://www.instagram.com/evolutiondance_centre?igsh=aGJnZWt2N3cwN3Jk" target="_blank">📷</a>
+                    <a href="https://youtube.com/@edceternals-g3i?si=o3Gl9xt_s5TvM05G" target="_blank">▶</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="classes.html">Classes</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="wedding.html">Wedding Choreography</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li><a href="tel:+919971711243">Aakash: +91 99717 11243</a></li>
+                    <li><a href="tel:+917678358116">Naina: +91 76783 58116</a></li>
+                    <li><a href="mailto:edceternals@gmail.com">edceternals@gmail.com</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Location</h3>
+                <p style="color: #999;">E-100, Jeewan Park, Uttam Nagar, New Delhi - 110059, India</p>
+                <a href="https://maps.app.goo.gl/cfJKi5iW6E18Kwmt6?g_st=ic" target="_blank" class="btn btn-primary" style="display: inline-block; margin-top: 1rem; padding: 0.7rem 1.5rem; font-size: 0.9rem;">VIEW ON MAP</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Evolution Dance Centre. All Rights Reserved.</p>
+            <p style="margin-top: 0.5rem;">Affiliated with <a href="https://sskalakendra.org" target="_blank" style="color: var(--primary);">Suro Bharti Sangeet Kala Kendra</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
