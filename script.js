@@ -1,171 +1,235 @@
-// ===== NAVIGATION =====
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('nav-menu');
-const navbar = document.getElementById('navbar');
+// ==========================================
+// EVOLUTION DANCE CENTRE - MAIN JAVASCRIPT
+// ==========================================
 
-// Toggle mobile menu
-if (hamburger) {
-    hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        hamburger.classList.toggle('active');
-    });
+// Mobile Menu Toggle
+function toggleMenu() {
+    const navLinks = document.getElementById('navLinks');
+    const hamburger = document.getElementById('hamburger');
+    navLinks.classList.toggle('active');
+    hamburger.classList.toggle('active');
 }
 
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
+// Close mobile menu when clicking outside
+document.addEventListener('click', function(event) {
+    const navLinks = document.getElementById('navLinks');
+    const hamburger = document.getElementById('hamburger');
+    
+    if (navLinks && hamburger && !hamburger.contains(event.target) && !navLinks.contains(event.target)) {
+        navLinks.classList.remove('active');
         hamburger.classList.remove('active');
-    });
-});
-
-// Navbar scroll effect
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 100) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
     }
 });
 
-// ===== PORTFOLIO FILTER =====
-const filterBtns = document.querySelectorAll('.filter-btn');
-const portfolioItems = document.querySelectorAll('.portfolio-item');
-
-if (filterBtns.length > 0) {
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // Remove active class from all buttons
-            filterBtns.forEach(b => b.classList.remove('active'));
-            // Add active class to clicked button
-            btn.classList.add('active');
-            
-            const filter = btn.getAttribute('data-filter');
-            
-            portfolioItems.forEach(item => {
-                if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                    item.style.display = 'block';
-                    setTimeout(() => {
-                        item.style.opacity = '1';
-                        item.style.transform = 'scale(1)';
-                    }, 10);
-                } else {
-                    item.style.opacity = '0';
-                    item.style.transform = 'scale(0.8)';
-                    setTimeout(() => {
-                        item.style.display = 'none';
-                    }, 300);
-                }
-            });
-        });
-    });
-}
-
-// ===== FAQ ACCORDION =====
-const faqItems = document.querySelectorAll('.faq-item');
-
-faqItems.forEach(item => {
-    const question = item.querySelector('.faq-question');
-    
-    question.addEventListener('click', () => {
-        // Close all other items
-        faqItems.forEach(otherItem => {
-            if (otherItem !== item) {
-                otherItem.classList.remove('active');
+// Close mobile menu when clicking on a link
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            const navLinksContainer = document.getElementById('navLinks');
+            const hamburger = document.getElementById('hamburger');
+            if (navLinksContainer && hamburger) {
+                navLinksContainer.classList.remove('active');
+                hamburger.classList.remove('active');
             }
         });
-        
-        // Toggle current item
-        item.classList.toggle('active');
     });
 });
 
-// ===== CONTACT FORM =====
-const contactForm = document.getElementById('contactForm');
-
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(contactForm);
-        const data = Object.fromEntries(formData);
-        
-        // Here you would typically send the data to a server
-        console.log('Form submitted:', data);
-        
-        // Show success message
-        alert('Thank you for your message! We will get back to you soon.');
-        
-        // Reset form
-        contactForm.reset();
+// ==========================================
+// VIDEO FILTERING FUNCTION
+// ==========================================
+function filterVideos(category) {
+    const videos = document.querySelectorAll('.video-card');
+    const buttons = document.querySelectorAll('.filter-btn');
+    
+    // Update active button
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    // Filter videos
+    videos.forEach(video => {
+        if (category === 'all' || video.dataset.category === category) {
+            video.style.display = 'block';
+        } else {
+            video.style.display = 'none';
+        }
     });
 }
 
-// ===== SMOOTH SCROLL =====
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+// ==========================================
+// VIDEO PLAYER FUNCTIONS (For Portfolio)
+// ==========================================
+
+// Play video in fullscreen modal
+function playVideo(videoPath, videoTitle) {
+    const modal = document.getElementById('videoModal');
+    const modalVideo = document.getElementById('modalVideo');
+    const modalVideoSource = document.getElementById('modalVideoSource');
+    
+    if (modal && modalVideo && modalVideoSource) {
+        modalVideoSource.src = videoPath;
+        modalVideo.load();
+        modal.style.display = 'block';
+        modalVideo.play();
+    }
+}
+
+// Close video modal
+function closeVideoModal() {
+    const modal = document.getElementById('videoModal');
+    const modalVideo = document.getElementById('modalVideo');
+    
+    if (modal && modalVideo) {
+        modalVideo.pause();
+        modalVideo.currentTime = 0;
+        modal.style.display = 'none';
+    }
+}
+
+// Close modal when clicking outside video
+window.onclick = function(event) {
+    const modal = document.getElementById('videoModal');
+    if (event.target == modal) {
+        closeVideoModal();
+    }
+}
+
+// Close modal on Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeVideoModal();
+    }
+});
+
+// ==========================================
+// SMOOTH SCROLL FOR ANCHOR LINKS
+// ==========================================
+document.addEventListener('DOMContentLoaded', function() {
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    
+    anchorLinks.forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href');
+            if (targetId !== '#') {
+                e.preventDefault();
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
+    });
+});
+
+// ==========================================
+// NAVBAR SCROLL EFFECT
+// ==========================================
+window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('nav');
+    if (navbar) {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    }
+});
+
+// ==========================================
+// FORM VALIDATION (Contact Page)
+// ==========================================
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.querySelector('.contact-form form');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            // Basic validation
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            const subject = document.getElementById('subject');
+            const message = document.getElementById('message');
+            
+            let isValid = true;
+            
+            if (name && name.value.trim() === '') {
+                alert('Please enter your name');
+                isValid = false;
+            }
+            
+            if (email && email.value.trim() === '') {
+                alert('Please enter your email');
+                isValid = false;
+            }
+            
+            if (subject && subject.value === '') {
+                alert('Please select a subject');
+                isValid = false;
+            }
+            
+            if (message && message.value.trim() === '') {
+                alert('Please enter a message');
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                e.preventDefault();
+            }
+        });
+    }
+});
+
+// ==========================================
+// LAZY LOADING FOR IMAGES
+// ==========================================
+document.addEventListener('DOMContentLoaded', function() {
+    const images = document.querySelectorAll('img[data-src]');
+    
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+                observer.unobserve(img);
+            }
+        });
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+});
+
+// ==========================================
+// PREVENT VIDEO AUTOPLAY ON PAGE LOAD
+// ==========================================
+document.addEventListener('DOMContentLoaded', function() {
+    const videos = document.querySelectorAll('video');
+    videos.forEach(video => {
+        video.pause();
+    });
+});
+
+// ==========================================
+// ACTIVE PAGE HIGHLIGHT IN NAVIGATION
+// ==========================================
+document.addEventListener('DOMContentLoaded', function() {
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('.nav-links a');
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === currentPage) {
+            link.classList.add('active');
         }
     });
 });
 
-// ===== ANIMATION ON SCROLL =====
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
-
-// Observe elements with data-aos attribute
-document.querySelectorAll('[data-aos]').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'all 0.8s ease';
-    observer.observe(el);
-});
-
-// ===== PORTFOLIO ITEM CLICK =====
-document.querySelectorAll('.portfolio-item').forEach(item => {
-    item.addEventListener('click', () => {
-        // You can add lightbox functionality here
-        console.log('Portfolio item clicked');
-    });
-});
-
-// ===== VIDEO ITEMS CLICK =====
-document.querySelectorAll('.video-item').forEach(item => {
-    item.addEventListener('click', () => {
-        // Redirect to YouTube channel or open video
-        window.open('https://youtube.com/@edceternals-g3i?si=o3Gl9xt_s5TvM05G', '_blank');
-    });
-});
-
-// ===== LOADING ANIMATION =====
-window.addEventListener('load', () => {
-    document.body.style.opacity = '0';
-    setTimeout(() => {
-        document.body.style.transition = 'opacity 0.5s ease';
-        document.body.style.opacity = '1';
-    }, 100);
-});
-
-// ===== DYNAMIC YEAR IN FOOTER =====
-const yearElements = document.querySelectorAll('.current-year');
-yearElements.forEach(el => {
-    el.textContent = new Date().getFullYear();
-});
+// ==========================================
+// CONSOLE WELCOME MESSAGE
+// ==========================================
+console.log('%c🎭 Evolution Dance Centre', 'color: #ff6b00; font-size: 24px; font-weight: bold;');
+console.log('%cWebsite by Evolution Dance Centre', 'color: #ffa500; font-size: 14px;');
+console.log('%cVisit us: E-100, Jeewan Park, Uttam Nagar, New Delhi', 'color: #999;');
