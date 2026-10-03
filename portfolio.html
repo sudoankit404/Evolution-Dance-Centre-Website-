@@ -1,459 +1,240 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Evolution Dance Centre</title>
-    <link rel="icon" type="image/png" href="logo.png">
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Video Player Styles */
-        .video-player {
-            width: 100%;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        
-        .video-player video {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        .video-thumbnail-custom {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%; /* 16:9 aspect ratio */
-            background: linear-gradient(135deg, rgba(255, 107, 0, 0.2), rgba(255, 165, 0, 0.2));
-            cursor: pointer;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        
-        .video-thumbnail-custom video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-        }
-        
-        .video-card:hover .video-overlay {
-            background: rgba(0, 0, 0, 0.5);
-        }
-        
-        .play-button {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2rem;
-            box-shadow: 0 5px 30px rgba(255, 107, 0, 0.5);
-            transition: all 0.3s;
-        }
-        
-        .video-card:hover .play-button {
-            transform: scale(1.1);
-        }
-        
-        /* Modal for fullscreen video */
-        .video-modal {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-        }
-        
-        .modal-content {
-            position: relative;
-            max-width: 90%;
-            max-height: 90%;
-            margin: auto;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: -40px;
-            right: 0;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 10000;
-        }
-        
-        .close-modal:hover {
-            color: var(--primary);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Portfolio — Evolution Dance Centre</title>
+<meta name="description" content="Watch Evolution Dance Centre showcases, performances, battles, competitions and championships.">
+<meta name="theme-color" content="#060e1d">
+<meta name="color-scheme" content="dark light">
+<meta property="og:title" content="Portfolio — Evolution Dance Centre">
+<meta property="og:description" content="Watch Evolution Dance Centre showcases, performances, battles, competitions and championships.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav>
-        <div class="nav-container">
-            <div class="logo-section">
-                <img src="logo.png" alt="Evolution Dance Centre Logo">
-                <span>EVOLUTION DANCE CENTRE</span>
-            </div>
-            <div class="hamburger" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">HOME</a></li>
-                <li><a href="about.html">ABOUT</a></li>
-                <li><a href="classes.html">CLASSES</a></li>
-                <li><a href="portfolio.html" class="active">PORTFOLIO</a></li>
-                <li><a href="wedding.html">WEDDING</a></li>
-                <li><a href="contact.html">CONTACT</a></li>
-            </ul>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol><symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol><symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M3 21l1.65-4.9A9 9 0 1 1 8 19.4L3 21z"/><path d="M9 8.6c0 3.4 2.6 6.4 6 6.4l1.1-1.5-1.9-1-.9.8a4 4 0 0 1-1.9-1.9l.8-.9-1-1.9L9 8.6z"/></symbol><symbol id="i-facebook" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></symbol><symbol id="i-instagram" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></symbol><symbol id="i-youtube" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><path d="M9.75 15.02 15.5 11.75 9.75 8.48z"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z" fill="currentColor" stroke="none"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol><symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol><symbol id="i-building" viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></symbol><symbol id="i-video" viewBox="0 0 24 24"><path d="m23 7-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/><path d="M19 17l.7 1.8 1.8.7-1.8.7L19 22l-.7-1.8-1.8-.7 1.8-.7L19 17z"/></symbol><symbol id="i-rings" viewBox="0 0 24 24"><circle cx="9" cy="14.5" r="5.5"/><circle cx="15" cy="14.5" r="5.5"/><path d="M12 2.5l1.8 2.4L12 7.3 10.2 4.9 12 2.5z"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol><symbol id="i-hiphop" viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></symbol><symbol id="i-popping" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol><symbol id="i-electro" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol><symbol id="i-freestyle" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/></symbol><symbol id="i-breaking" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></symbol><symbol id="i-bollywood" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2.2"/><path d="M7 2v20M17 2v20M2 12h20M2 7h5M2 17h5M17 17h5M17 7h5"/></symbol><symbol id="i-bhangra" viewBox="0 0 24 24"><ellipse cx="12" cy="7" rx="9" ry="3.5"/><path d="M3 7v10c0 1.9 4 3.5 9 3.5s9-1.6 9-3.5V7M8 10.5l-1 9M16 10.5l1 9"/></symbol><symbol id="i-classical" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.4"/><path d="M12 9.6C9.5 7 9.8 4 12 2c2.2 2 2.5 5 0 7.6zM14.4 12c2.6-2.5 5.6-2.2 7.6 0-2 2.2-5 2.5-7.6 0zM12 14.4c2.5 2.6 2.2 5.6 0 7.6-2.2-2-2.5-5 0-7.6zM9.6 12C7 14.5 4 14.2 2 12c2-2.2 5-2.5 7.6 0z"/></symbol><symbol id="i-semi" viewBox="0 0 24 24"><path d="M18.178 8c5.096 0 5.096 8 0 8-5.095 0-7.133-8-12.356-8-5.096 0-5.096 8 0 8 5.223 0 7.26-8 12.356-8z"/></symbol></svg>
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"><span id="progress"></span></div>
+<header class="site-header" id="header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="Evolution Dance Centre — home">
+      <img src="logo.png" alt="" width="46" height="40">
+      <span class="brand-text"><strong>Evolution</strong><small>Dance Centre</small></span>
+    </a>
+    <nav class="site-nav" id="siteNav" aria-label="Main navigation">
+      <ul><li><a class="nl" href="index.html">HOME</a></li><li><a class="nl" href="about.html">ABOUT</a></li><li><a class="nl" href="classes.html">CLASSES</a></li><li><a class="nl" href="portfolio.html" aria-current="page">PORTFOLIO</a></li><li><a class="nl" href="wedding.html">WEDDING</a></li><li><a class="nl" href="contact.html">CONTACT</a></li></ul>
+      <div class="nav-extra">
+        <a class="btn btn-primary btn-block" href="contact.html">Book a free trial <svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+        <div class="nav-contact">
+          <a href="tel:+919971711243"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg> Aakash · +91 99717 11243</a>
+          <a href="tel:+917678358116"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg> Naina · +91 76783 58116</a>
+          <a href="mailto:edceternals@gmail.com"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg> edceternals@gmail.com</a>
         </div>
+      </div>
     </nav>
-
-    <div class="page-header">
-        <h1>OUR <span>PORTFOLIO</span></h1>
-        <p>Witness Our Artistic Journey</p>
+    <div class="header-actions">
+      <a class="btn btn-primary btn-sm header-cta" href="contact.html">Join now</a>
+      <button class="icon-btn nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
+        <span class="bars"><i></i><i></i><i></i></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="nav-scrim" id="navScrim"></div>
+<main id="main">
+<section class="page-hero">
+  <div class="container">
+    <nav class="crumbs reveal" aria-label="Breadcrumb"><a href="index.html">HOME</a><span aria-hidden="true">/</span><span>PORTFOLIO</span></nav>
+    <h1 class="reveal" style="--d:.06s">Witness our <span class="grad-text">artistic journey.</span></h1>
+    <p class="lead reveal" style="--d:.12s">Watch our performances, battles and competitions.</p>
+  </div>
+</section>
+<section class="section" style="padding-top:0">
+  <div class="container">
+    <div class="filters" role="group" aria-label="Filter videos" data-filter-group=".video-card" data-empty="#videoEmpty">
+      <button class="chip" type="button" data-filter="all" aria-pressed="true">All <small>8</small></button>
+      <button class="chip" type="button" data-filter="showcases" aria-pressed="false">Showcases <small>0</small></button>
+      <button class="chip" type="button" data-filter="performances" aria-pressed="false">Performances <small>0</small></button>
+      <button class="chip" type="button" data-filter="battles" aria-pressed="false">Battles <small>0</small></button>
+      <button class="chip" type="button" data-filter="competitions" aria-pressed="false">Competitions <small>0</small></button>
+      <button class="chip" type="button" data-filter="championships" aria-pressed="false">Championships <small>0</small></button>
     </div>
 
-    <section class="video-section">
-        <div class="container">
-            <h2 class="section-title">VIDEO <span>GALLERY</span></h2>
-            <p style="text-align: center; color: #aaa; margin-bottom: 3rem; font-size: 1.1rem;">Watch our performances, battles, and competitions</p>
-
-            <!-- Filter Buttons -->
-            <div class="filter-buttons">
-                <button class="filter-btn active" onclick="filterVideos('all')">ALL</button>
-                <button class="filter-btn" onclick="filterVideos('showcases')">SHOWCASES</button>
-                <button class="filter-btn" onclick="filterVideos('performances')">PERFORMANCES</button>
-                <button class="filter-btn" onclick="filterVideos('battles')">BATTLES</button>
-                <button class="filter-btn" onclick="filterVideos('competitions')">COMPETITIONS</button>
-                <button class="filter-btn" onclick="filterVideos('championships')">CHAMPIONSHIPS</button>
-            </div>
-
-            <!-- 
-                ===================================================
-                TO ADD YOUR VIDEOS:
-                ===================================================
-                
-                1. Put your video files in the "videos" folder
-                   Example: videos/my-performance.mp4
-                
-                2. Copy one of the templates below
-                
-                3. Replace "videos/placeholder.mp4" with your video file path
-                   Example: "videos/hip-hop-battle-2024.mp4"
-                
-                4. Change the title to your video name
-                
-                5. Set the correct category:
-                   - showcases
-                   - performances
-                   - battles
-                   - competitions
-                   - championships
-                
-                Supported video formats: .mp4, .webm, .mov
-                ===================================================
-            -->
-
-            <div class="video-grid">
-                
-                <!-- ========== SHOWCASES ========== -->
-                <!-- Copy this template for showcase videos -->
-                <div class="video-card" data-category="showcases">
-                    <div class="video-thumbnail-custom" onclick="playVideo('videos/showcase1.mp4', 'Dance Showcase 2024')">
-                        <video>
-                            <source src="videos/showcase1.mp4" type="video/mp4">
-                        </video>
-                        <div class="video-overlay">
-                            <div class="play-button">▶</div>
-                        </div>
-                    </div>
-                    <div class="video-info">
-                        <h4>Dance Showcase 2024</h4>
-                        <span class="video-category">Showcases</span>
-                    </div>
-                </div>
-
-                <div class="video-card" data-category="showcases">
-                    <div class="video-thumbnail-custom" onclick="playVideo('videos/showcase2.mp4', 'Annual Day Showcase')">
-                        <video>
-                            <source src="videos/showcase2.mp4" type="video/mp4">
-                        </video>
-                        <div class="video-overlay">
-                            <div class="play-button">▶</div>
-                        </div>
-                    </div>
-                    <div class="video-info">
-                        <h4>Annual Day Showcase</h4>
-                        <span class="video-category">Showcases</span>
-                    </div>
-                </div>
-
-                <!-- ========== PERFORMANCES ========== -->
-                <!-- Copy this template for performance videos -->
-                <div class="video-card" data-category="performances">
-                    <div class="video-thumbnail-custom" onclick="playVideo('videos/performance1.mp4', 'Hip Hop Performance')">
-                        <video>
-                            <source src="videos/performance1.mp4" type="video/mp4">
-                        </video>
-                        <div class="video-overlay">
-                            <div class="play-button">▶</div>
-                        </div>
-                    </div>
-                    <div class="video-info">
-                        <h4>Hip Hop Performance</h4>
-                        <span class="video-category">Performances</span>
-                    </div>
-                </div>
-
-                <div class="video-card" data-category="performances">
-                    <div class="video-thumbnail-custom" onclick="playVideo('videos/performance2.mp4', 'Bollywood Night Performance')">
-                        <video>
-                            <source src="videos/performance2.mp4" type="video/mp4">
-                        </video>
-                        <div class="video-overlay">
-                            <div class="play-button">▶</div>
-                        </div>
-                    </div>
-                    <div class="video-info">
-                        <h4>Bollywood Night Performance</h4>
-                        <span class="video-category">Performances</span>
-                    </div>
-                </div>
-
-                <!-- ========== BATTLES ========== -->
-                <!-- Copy this template for battle videos -->
-                <div class="video-card" data-category="battles">
-                    <div class="video-thumbnail-custom" onclick="playVideo('videos/battle1.mp4', 'Breaking Battle')">
-                        <video>
-                            <source src="videos/battle1.mp4" type="video/mp4">
-                        </video>
-                        <div class="video-overlay">
-                            <div class="play-button">▶</div>
-                        </div>
-                    </div>
-                    <div class="video-info">
-                        <h4>Breaking Battle</h4>
-                        <span class="video-category">Battles</span>
-                    </div>
-                </div>
-
-                <div class="video-card" data-category="battles">
-                    <div class="video-thumbnail-custom" onclick="playVideo('videos/battle2.mp4', 'Hip Hop Dance Battle')">
-                        <video>
-                            <source src="videos/battle2.mp4" type="video/mp4">
-                        </video>
-                        <div class="video-overlay">
-                            <div class="play-button">▶</div>
-                        </div>
-                    </div>
-                    <div class="video-info">
-                        <h4>Hip Hop Dance Battle</h4>
-                        <span class="video-category">Battles</span>
-                    </div>
-                </div>
-
-                <!-- ========== COMPETITIONS ========== -->
-                <!-- Copy this template for competition videos -->
-                <div class="video-card" data-category="competitions">
-                    <div class="video-thumbnail-custom" onclick="playVideo('videos/competition1.mp4', 'Delhi Dance Competition')">
-                        <video>
-                            <source src="videos/competition1.mp4" type="video/mp4">
-                        </video>
-                        <div class="video-overlay">
-                            <div class="play-button">▶</div>
-                        </div>
-                    </div>
-                    <div class="video-info">
-                        <h4>Delhi Dance Competition</h4>
-                        <span class="video-category">Competitions</span>
-                    </div>
-                </div>
-
-                <!-- ========== CHAMPIONSHIPS ========== -->
-                <!-- Copy this template for championship videos -->
-                <div class="video-card" data-category="championships">
-                    <div class="video-thumbnail-custom" onclick="playVideo('videos/championship1.mp4', 'National Dance Championship')">
-                        <video>
-                            <source src="videos/championship1.mp4" type="video/mp4">
-                        </video>
-                        <div class="video-overlay">
-                            <div class="play-button">▶</div>
-                        </div>
-                    </div>
-                    <div class="video-info">
-                        <h4>National Dance Championship</h4>
-                        <span class="video-category">Championships</span>
-                    </div>
-                </div>
-
-                <!-- 
-                    ===== ADD MORE VIDEOS BELOW THIS LINE =====
-                    
-                    Template to copy:
-                    
-                    <div class="video-card" data-category="CATEGORY">
-                        <div class="video-thumbnail-custom" onclick="playVideo('videos/YOUR_VIDEO.mp4', 'Video Title')">
-                            <video>
-                                <source src="videos/YOUR_VIDEO.mp4" type="video/mp4">
-                            </video>
-                            <div class="video-overlay">
-                                <div class="play-button">▶</div>
-                            </div>
-                        </div>
-                        <div class="video-info">
-                            <h4>Your Video Title</h4>
-                            <span class="video-category">Category Name</span>
-                        </div>
-                    </div>
-                -->
-
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Video Modal for fullscreen playback -->
-    <div id="videoModal" class="video-modal">
-        <span class="close-modal" onclick="closeVideoModal()">&times;</span>
-        <div class="modal-content">
-            <video id="modalVideo" controls autoplay style="width: 100%; max-height: 90vh;">
-                <source id="modalVideoSource" src="" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
+    <!--
+      ===============================================================
+      HOW TO ADD A VIDEO
+      1. Put the file in a "videos" folder next to this page, e.g. videos/my-battle.mp4
+      2. Copy one <article class="card video-card ..."> block below and edit:
+           data-category = showcases | performances | battles | competitions | championships
+           data-src      = videos/my-battle.mp4
+           data-title    = the title (also used in aria-label and the <h3>)
+           and the visible category label + <h3> text
+      3. Prefer YouTube? Replace data-src="..." with data-yt="VIDEO_ID"
+         (the part after v= in the YouTube link).
+      4. Optional cover image: add <img class="poster" src="videos/cover.jpg" alt="">
+         as the first child inside the .thumb button.
+      ===============================================================
+    -->
+    <div class="video-grid">
+      <article class="card video-card f-item reveal" data-category="showcases">
+        <button class="thumb" type="button" data-src="videos/showcase1.mp4" data-title="Dance Showcase 2024" aria-label="Play: Dance Showcase 2024">
+          <span class="cat-badge">Showcases</span>
+          <span class="play"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-play"/></svg></span>
+        </button>
+        <div class="video-info"><h3>Dance Showcase 2024</h3></div>
+      </article>
+      <article class="card video-card f-item reveal" data-category="showcases">
+        <button class="thumb" type="button" data-src="videos/showcase2.mp4" data-title="Annual Day Showcase" aria-label="Play: Annual Day Showcase">
+          <span class="cat-badge">Showcases</span>
+          <span class="play"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-play"/></svg></span>
+        </button>
+        <div class="video-info"><h3>Annual Day Showcase</h3></div>
+      </article>
+      <article class="card video-card f-item reveal" data-category="performances">
+        <button class="thumb" type="button" data-src="videos/performance1.mp4" data-title="Hip Hop Performance" aria-label="Play: Hip Hop Performance">
+          <span class="cat-badge">Performances</span>
+          <span class="play"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-play"/></svg></span>
+        </button>
+        <div class="video-info"><h3>Hip Hop Performance</h3></div>
+      </article>
+      <article class="card video-card f-item reveal" data-category="performances">
+        <button class="thumb" type="button" data-src="videos/performance2.mp4" data-title="Bollywood Night Performance" aria-label="Play: Bollywood Night Performance">
+          <span class="cat-badge">Performances</span>
+          <span class="play"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-play"/></svg></span>
+        </button>
+        <div class="video-info"><h3>Bollywood Night Performance</h3></div>
+      </article>
+      <article class="card video-card f-item reveal" data-category="battles">
+        <button class="thumb" type="button" data-src="videos/battle1.mp4" data-title="Breaking Battle" aria-label="Play: Breaking Battle">
+          <span class="cat-badge">Battles</span>
+          <span class="play"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-play"/></svg></span>
+        </button>
+        <div class="video-info"><h3>Breaking Battle</h3></div>
+      </article>
+      <article class="card video-card f-item reveal" data-category="battles">
+        <button class="thumb" type="button" data-src="videos/battle2.mp4" data-title="Hip Hop Dance Battle" aria-label="Play: Hip Hop Dance Battle">
+          <span class="cat-badge">Battles</span>
+          <span class="play"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-play"/></svg></span>
+        </button>
+        <div class="video-info"><h3>Hip Hop Dance Battle</h3></div>
+      </article>
+      <article class="card video-card f-item reveal" data-category="competitions">
+        <button class="thumb" type="button" data-src="videos/competition1.mp4" data-title="Delhi Dance Competition" aria-label="Play: Delhi Dance Competition">
+          <span class="cat-badge">Competitions</span>
+          <span class="play"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-play"/></svg></span>
+        </button>
+        <div class="video-info"><h3>Delhi Dance Competition</h3></div>
+      </article>
+      <article class="card video-card f-item reveal" data-category="championships">
+        <button class="thumb" type="button" data-src="videos/championship1.mp4" data-title="National Dance Championship" aria-label="Play: National Dance Championship">
+          <span class="cat-badge">Championships</span>
+          <span class="play"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-play"/></svg></span>
+        </button>
+        <div class="video-info"><h3>National Dance Championship</h3></div>
+      </article>
     </div>
+    <p class="empty" id="videoEmpty" hidden>No videos in this category yet.</p>
 
-    <section class="content-section">
-        <div class="container">
-            <h2 class="section-title">OUR <span>ACHIEVEMENTS</span></h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">🏆</div>
-                    <h3 style="font-size: 2.5rem;">50+</h3>
-                    <p>Awards Won</p>
-                </div>
-                <div class="stat-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">⭐</div>
-                    <h3 style="font-size: 2.5rem;">100+</h3>
-                    <p>Performances</p>
-                </div>
-                <div class="stat-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">👥</div>
-                    <h3 style="font-size: 2.5rem;">500+</h3>
-                    <p>Students Trained</p>
-                </div>
-                <div class="stat-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">🎓</div>
-                    <h3 style="font-size: 2.5rem;">SBSKK</h3>
-                    <p>Certified Institution</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div style="text-align:center;margin-top:2.4rem" class="reveal">
+      <a class="btn btn-ghost btn-lg" href="https://youtube.com/@edceternals-g3i?si=o3Gl9xt_s5TvM05G" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-youtube"/></svg> Watch more on YouTube</a>
+    </div>
+  </div>
+</section>
 
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <img src="logo.png" alt="Evolution Dance Centre" class="footer-logo">
-                <p style="color: #999; margin-bottom: 1rem;">Delhi's premier dance academy offering world-class training in multiple dance forms.</p>
-                <div class="social-links">
-                    <a href="https://www.facebook.com/share/1BMeq9kMNm/?mibextid=wwXIfr" target="_blank">f</a>
-                    <a href="https://www.instagram.com/evolutiondance_centre?igsh=aGJnZWt2N3cwN3Jk" target="_blank">📷</a>
-                    <a href="https://youtube.com/@edceternals-g3i?si=o3Gl9xt_s5TvM05G" target="_blank">▶</a>
-                </div>
-            </div>
-            <div class="footer-col">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="classes.html">Classes</a></li>
-                    <li><a href="portfolio.html">Portfolio</a></li>
-                    <li><a href="wedding.html">Wedding Choreography</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>Contact Info</h3>
-                <ul>
-                    <li><a href="tel:+919971711243">Aakash: +91 99717 11243</a></li>
-                    <li><a href="tel:+917678358116">Naina: +91 76783 58116</a></li>
-                    <li><a href="mailto:edceternals@gmail.com">edceternals@gmail.com</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>Location</h3>
-                <p style="color: #999;">E-100, Jeewan Park, Uttam Nagar, New Delhi - 110059, India</p>
-                <a href="https://maps.app.goo.gl/cfJKi5iW6E18Kwmt6?g_st=ic" target="_blank" class="btn btn-primary" style="display: inline-block; margin-top: 1rem; padding: 0.7rem 1.5rem; font-size: 0.9rem;">VIEW ON MAP</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Evolution Dance Centre. All Rights Reserved.</p>
-            <p style="margin-top: 0.5rem;">Affiliated with <a href="https://sskalakendra.org" target="_blank" style="color: var(--primary);">Suro Bharti Sangeet Kala Kendra</a></p>
-        </div>
-    </footer>
+<dialog class="video-dialog" id="videoDialog" aria-labelledby="vdTitle">
+  <div class="vd-frame">
+    <div class="vd-fallback">
+      <svg class="ic" aria-hidden="true" focusable="false"><use href="#i-video"/></svg>
+      <p>This video isn't available here yet. Watch our latest performances on YouTube.</p>
+      <a class="btn btn-primary btn-sm" href="https://youtube.com/@edceternals-g3i?si=o3Gl9xt_s5TvM05G" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-youtube"/></svg> Open YouTube</a>
+    </div>
+  </div>
+  <div class="vd-bar">
+    <h3 id="vdTitle">Video</h3>
+    <button class="icon-btn vd-close" type="button" data-close-video aria-label="Close video">
+      <svg class="ic" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+</dialog>
 
-    <script src="script.js"></script>
-    <script>
-        // Play video in modal
-        function playVideo(videoPath, videoTitle) {
-            const modal = document.getElementById('videoModal');
-            const modalVideo = document.getElementById('modalVideo');
-            const modalVideoSource = document.getElementById('modalVideoSource');
-            
-            modalVideoSource.src = videoPath;
-            modalVideo.load();
-            modal.style.display = 'block';
-            modalVideo.play();
-        }
-        
-        // Close video modal
-        function closeVideoModal() {
-            const modal = document.getElementById('videoModal');
-            const modalVideo = document.getElementById('modalVideo');
-            
-            modalVideo.pause();
-            modal.style.display = 'none';
-        }
-        
-        // Close modal when clicking outside video
-        window.onclick = function(event) {
-            const modal = document.getElementById('videoModal');
-            if (event.target == modal) {
-                closeVideoModal();
-            }
-        }
-        
-        // Close modal on Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeVideoModal();
-            }
-        });
-    </script>
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head reveal"><span class="eyebrow">Milestones</span><h2>Our <span class="grad-text">achievements</span></h2></div>
+    <div class="stats" data-stagger>
+      <div class="card stat reveal"><div class="icon-badge" style="margin-inline:auto"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-award"/></svg></div><strong class="grad-text" data-count="50" data-suffix="+">50+</strong><span>Awards won</span></div>
+      <div class="card stat reveal"><div class="icon-badge" style="margin-inline:auto"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-star"/></svg></div><strong class="grad-text" data-count="100" data-suffix="+">100+</strong><span>Performances</span></div>
+      <div class="card stat reveal"><div class="icon-badge" style="margin-inline:auto"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-users"/></svg></div><strong class="grad-text" data-count="500" data-suffix="+">500+</strong><span>Students trained</span></div>
+      <div class="card stat reveal"><div class="icon-badge" style="margin-inline:auto"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-building"/></svg></div><strong class="grad-text">SBSKK</strong><span>Certified institution</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:clamp(2rem,5vw,3rem)">
+  <div class="container">
+    <div class="cta reveal">
+      <h2>Want to be on this stage?</h2>
+      <p>Start training with us and become part of the next showcase.</p>
+      <div class="hero-cta"><a class="btn btn-primary btn-lg" href="contact.html">Book a free trial <svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a><a class="btn btn-ghost btn-lg" href="https://wa.me/919971711243?text=Hi%20Evolution%20Dance%20Centre!" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg> WhatsApp us</a></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="logo.png" alt="Evolution Dance Centre" width="120" height="105" loading="lazy">
+        <p>Delhi's premier dance academy offering world-class training in multiple dance forms.</p>
+        <div class="socials">
+          <a href="https://www.facebook.com/share/1BMeq9kMNm/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-facebook"/></svg></a>
+          <a href="https://www.instagram.com/evolutiondance_centre?igsh=aGJnZWt2N3cwN3Jk" target="_blank" rel="noopener" aria-label="Instagram"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-instagram"/></svg></a>
+          <a href="https://youtube.com/@edceternals-g3i?si=o3Gl9xt_s5TvM05G" target="_blank" rel="noopener" aria-label="YouTube"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-youtube"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="classes.html">CLASSES</a></li>
+          <li><a href="portfolio.html">PORTFOLIO</a></li>
+          <li><a href="wedding.html">WEDDING</a></li>
+          <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul class="f-contact">
+          <li><a href="tel:+919971711243"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg> Aakash: +91 99717 11243</a></li>
+          <li><a href="tel:+917678358116"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg> Naina: +91 76783 58116</a></li>
+          <li><a href="mailto:edceternals@gmail.com"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg> edceternals@gmail.com</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Visit the studio</h4>
+        <p>E-100, Jeewan Park, Uttam Nagar, New Delhi - 110059, India</p>
+        <a class="btn btn-ghost btn-sm" href="https://maps.app.goo.gl/cfJKi5iW6E18Kwmt6?g_st=ic" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-pin"/></svg> View on map</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span data-year>2026</span> Evolution Dance Centre. All rights reserved.</p>
+      <p>Affiliated with <a href="https://sskalakendra.org" target="_blank" rel="noopener">Suro Bharti Sangeet Kala Kendra</a></p>
+    </div>
+  </div>
+</footer>
+
+<div class="fabs">
+  <button class="fab fab-top" id="toTop" type="button" aria-label="Back to top"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg></button>
+  <a class="fab fab-wa" href="https://wa.me/919971711243?text=Hi%20Evolution%20Dance%20Centre!" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg></a>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
