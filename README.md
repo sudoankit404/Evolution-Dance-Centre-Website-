@@ -11,7 +11,7 @@ EVOLUTION DANCE CENTRE - WEBSITE FILES
 - portfolio.html   (Videos with 5 categories!)
 - wedding.html     (Wedding choreography)
 - contact.html     (Contact form)
-- styles.css       (Orange theme from logo)
+- styles.css       (lime green `#90c838` and blue `#3870b0` theme from logo)
 - script.js        (Navigation & filtering)
 - logo.png         (Academy logo)
 
@@ -23,8 +23,7 @@ EVOLUTION DANCE CENTRE - WEBSITE FILES
 ✅ Championships
 
 🎨 WEBSITE FEATURES:
-✅ Orange color scheme 
-✅ No emojis in dance forms
+✅ Colors come from the logo: lime green `#90c838` and blue `#3870b0` 
 ✅ No testimonials section
 ✅ Fully responsive
 ✅ Video filtering works automatically
