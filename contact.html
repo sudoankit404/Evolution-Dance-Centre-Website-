@@ -1,170 +1,163 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Evolution Dance Centre</title>
-    <link rel="icon" type="image/png" href="logo.png">
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact Us — Evolution Dance Centre</title>
+<meta name="description" content="Contact Evolution Dance Centre in Uttam Nagar, New Delhi. Call, WhatsApp, email or send us a message to book a free trial class.">
+<meta name="theme-color" content="#060e1d">
+<meta name="color-scheme" content="dark light">
+<meta property="og:title" content="Contact Us — Evolution Dance Centre">
+<meta property="og:description" content="Contact Evolution Dance Centre in Uttam Nagar, New Delhi. Call, WhatsApp, email or send us a message to book a free trial class.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav>
-        <div class="nav-container">
-            <div class="logo-section">
-                <img src="logo.png" alt="Evolution Dance Centre Logo">
-                <span>EVOLUTION DANCE CENTRE</span>
-            </div>
-            <div class="hamburger" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="index.html">HOME</a></li>
-                <li><a href="about.html">ABOUT</a></li>
-                <li><a href="classes.html">CLASSES</a></li>
-                <li><a href="portfolio.html">PORTFOLIO</a></li>
-                <li><a href="wedding.html">WEDDING</a></li>
-                <li><a href="contact.html" class="active">CONTACT</a></li>
-            </ul>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol><symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></symbol><symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol><symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M3 21l1.65-4.9A9 9 0 1 1 8 19.4L3 21z"/><path d="M9 8.6c0 3.4 2.6 6.4 6 6.4l1.1-1.5-1.9-1-.9.8a4 4 0 0 1-1.9-1.9l.8-.9-1-1.9L9 8.6z"/></symbol><symbol id="i-facebook" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></symbol><symbol id="i-instagram" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6"/></symbol><symbol id="i-youtube" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><path d="M9.75 15.02 15.5 11.75 9.75 8.48z"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z" fill="currentColor" stroke="none"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol><symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol><symbol id="i-building" viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></symbol><symbol id="i-video" viewBox="0 0 24 24"><path d="m23 7-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></symbol><symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/><path d="M19 17l.7 1.8 1.8.7-1.8.7L19 22l-.7-1.8-1.8-.7 1.8-.7L19 17z"/></symbol><symbol id="i-rings" viewBox="0 0 24 24"><circle cx="9" cy="14.5" r="5.5"/><circle cx="15" cy="14.5" r="5.5"/><path d="M12 2.5l1.8 2.4L12 7.3 10.2 4.9 12 2.5z"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol><symbol id="i-hiphop" viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></symbol><symbol id="i-popping" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol><symbol id="i-electro" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol><symbol id="i-freestyle" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/></symbol><symbol id="i-breaking" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></symbol><symbol id="i-bollywood" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2.2"/><path d="M7 2v20M17 2v20M2 12h20M2 7h5M2 17h5M17 17h5M17 7h5"/></symbol><symbol id="i-bhangra" viewBox="0 0 24 24"><ellipse cx="12" cy="7" rx="9" ry="3.5"/><path d="M3 7v10c0 1.9 4 3.5 9 3.5s9-1.6 9-3.5V7M8 10.5l-1 9M16 10.5l1 9"/></symbol><symbol id="i-classical" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.4"/><path d="M12 9.6C9.5 7 9.8 4 12 2c2.2 2 2.5 5 0 7.6zM14.4 12c2.6-2.5 5.6-2.2 7.6 0-2 2.2-5 2.5-7.6 0zM12 14.4c2.5 2.6 2.2 5.6 0 7.6-2.2-2-2.5-5 0-7.6zM9.6 12C7 14.5 4 14.2 2 12c2-2.2 5-2.5 7.6 0z"/></symbol><symbol id="i-semi" viewBox="0 0 24 24"><path d="M18.178 8c5.096 0 5.096 8 0 8-5.095 0-7.133-8-12.356-8-5.096 0-5.096 8 0 8 5.223 0 7.26-8 12.356-8z"/></symbol></svg>
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"><span id="progress"></span></div>
+<header class="site-header" id="header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="Evolution Dance Centre — home">
+      <img src="logo.png" alt="" width="46" height="40">
+      <span class="brand-text"><strong>Evolution</strong><small>Dance Centre</small></span>
+    </a>
+    <nav class="site-nav" id="siteNav" aria-label="Main navigation">
+      <ul><li><a class="nl" href="index.html">HOME</a></li><li><a class="nl" href="about.html">ABOUT</a></li><li><a class="nl" href="classes.html">CLASSES</a></li><li><a class="nl" href="portfolio.html">PORTFOLIO</a></li><li><a class="nl" href="wedding.html">WEDDING</a></li><li><a class="nl" href="contact.html" aria-current="page">CONTACT</a></li></ul>
+      <div class="nav-extra">
+        <a class="btn btn-primary btn-block" href="contact.html">Book a free trial <svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
+        <div class="nav-contact">
+          <a href="tel:+919971711243"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg> Aakash · +91 99717 11243</a>
+          <a href="tel:+917678358116"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg> Naina · +91 76783 58116</a>
+          <a href="mailto:edceternals@gmail.com"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg> edceternals@gmail.com</a>
         </div>
+      </div>
     </nav>
-
-    <div class="page-header">
-        <h1>CONTACT <span>US</span></h1>
-        <p>Get in Touch With Us</p>
+      <a class="btn btn-primary btn-sm header-cta" href="contact.html">Join now</a>
+      <button class="icon-btn nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
+        <span class="bars"><i></i><i></i><i></i></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="nav-scrim" id="navScrim"></div>
+<main id="main">
+<section class="page-hero">
+  <div class="container">
+    <nav class="crumbs reveal" aria-label="Breadcrumb"><a href="index.html">HOME</a><span aria-hidden="true">/</span><span>CONTACT</span></nav>
+    <h1 class="reveal" style="--d:.06s">Let's get you <span class="grad-text">dancing.</span></h1>
+    <p class="lead reveal" style="--d:.12s">Questions, free trials or wedding choreography. Tell us what you need and we'll get back to you.</p>
+  </div>
+</section>
+<section class="section" style="padding-top:0">
+  <div class="container contact-grid">
+    <div class="card form-card reveal">
+      <h2>Send us a message</h2>
+      <p>We usually reply within a day. For a faster answer, call or WhatsApp us.</p>
+      <form class="form" id="contactForm" novalidate>
+        <div class="row-2">
+          <div class="field"><label for="name">Your name <i>*</i></label><input class="input" id="name" name="name" type="text" autocomplete="name" placeholder="Your full name"><span class="err" role="alert"></span></div>
+          <div class="field"><label for="email">Email address <i>*</i></label><input class="input" id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com"><span class="err" role="alert"></span></div>
+        </div>
+        <div class="row-2">
+          <div class="field"><label for="phone">Phone number</label><input class="input" id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+91"><span class="err" role="alert"></span></div>
+          <div class="field"><label for="subject">Subject <i>*</i></label>
+            <select class="input" id="subject" name="subject">
+              <option value="">Select a subject</option>
+              <option value="Class Inquiry">Class inquiry</option>
+              <option value="Wedding Choreography">Wedding choreography</option>
+              <option value="Trial Class">Free trial class</option>
+              <option value="General Inquiry">General inquiry</option>
+              <option value="Other">Other</option>
+            </select><span class="err" role="alert"></span></div>
+        </div>
+        <div class="field"><label for="message">Message <i>*</i></label><textarea class="input" id="message" name="message" placeholder="Tell us about the dance style, your experience level, or your event..."></textarea><span class="err" role="alert"></span></div>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Send message <svg class="ic ic-arrow" aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></button>
+      </form>
+      <div class="success" id="formSuccess" role="status">
+        <strong>Almost done!</strong>
+        <p>Your email app should open with your message ready to send. If nothing opened, use one of these:</p>
+        <div class="hero-cta" style="margin:0">
+          <a class="btn btn-primary btn-sm" id="mailFallback" href="mailto:edceternals@gmail.com"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg> Open email</a>
+          <a class="btn btn-ghost btn-sm" id="waFallback" href="https://wa.me/919971711243" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg> Send on WhatsApp</a>
+        </div>
+      </div>
     </div>
 
-    <section class="content-section">
-        <div class="container">
-            <div class="contact-content">
-                <div class="contact-form">
-                    <h2 style="font-size: 2rem; margin-bottom: 2rem; color: var(--primary);">Send us a Message</h2>
-                    <form action="mailto:edceternals@gmail.com" method="POST" enctype="text/plain">
-                        <div class="form-group">
-                            <label for="name">Your Name *</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email Address *</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone">
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject *</label>
-                            <select id="subject" name="subject" required>
-                                <option value="">Select a subject</option>
-                                <option value="Class Inquiry">Class Inquiry</option>
-                                <option value="Wedding Choreography">Wedding Choreography</option>
-                                <option value="Trial Class">Free Trial Class</option>
-                                <option value="General Inquiry">General Inquiry</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message *</label>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block">SEND MESSAGE</button>
-                    </form>
-                </div>
+    <div class="info-stack" data-stagger>
+      <div class="card info reveal"><div class="icon-badge"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg></div><div><h3>Phone</h3><a href="tel:+919971711243">Aakash: +91 99717 11243</a><a href="tel:+917678358116">Naina: +91 76783 58116</a></div></div>
+      <div class="card info reveal"><div class="icon-badge"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg></div><div><h3>Email</h3><a href="mailto:edceternals@gmail.com">edceternals@gmail.com</a></div></div>
+      <div class="card info reveal"><div class="icon-badge"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-pin"/></svg></div><div><h3>Studio</h3><p>E-100, Jeewan Park, Uttam Nagar, New Delhi - 110059, India</p><a href="https://maps.app.goo.gl/cfJKi5iW6E18Kwmt6?g_st=ic" target="_blank" rel="noopener" style="color:var(--link);margin-top:.4rem">Open in Google Maps</a></div></div>
+      <div class="card info reveal"><div class="icon-badge"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg></div><div><h3>Hours</h3><p>Monday - Saturday: 9:00 AM - 9:00 PM</p><p>Sunday: 10:00 AM - 6:00 PM</p></div></div>
+      <div class="card reveal"><h3>Follow us</h3><div class="socials">
+        <a href="https://www.facebook.com/share/1BMeq9kMNm/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-facebook"/></svg></a>
+        <a href="https://www.instagram.com/evolutiondance_centre?igsh=aGJnZWt2N3cwN3Jk" target="_blank" rel="noopener" aria-label="Instagram"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-instagram"/></svg></a>
+        <a href="https://youtube.com/@edceternals-g3i?si=o3Gl9xt_s5TvM05G" target="_blank" rel="noopener" aria-label="YouTube"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-youtube"/></svg></a></div></div>
+    </div>
+  </div>
 
-                <div class="contact-info-grid">
-                    <div class="info-card">
-                        <div class="info-icon">📞</div>
-                        <h3>Phone</h3>
-                        <a href="tel:+919971711243">Aakash: +91 99717 11243</a>
-                        <a href="tel:+917678358116">Naina: +91 76783 58116</a>
-                    </div>
+  <div class="container">
+    <div class="map reveal">
+      <iframe title="Evolution Dance Centre on Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://maps.google.com/maps?q=E-100%2C%20Jeewan%20Park%2C%20Uttam%20Nagar%2C%20New%20Delhi%20110059&amp;z=15&amp;output=embed"></iframe>
+    </div>
+  </div>
+</section>
+</main>
 
-                    <div class="info-card">
-                        <div class="info-icon">✉️</div>
-                        <h3>Email</h3>
-                        <a href="mailto:edceternals@gmail.com">edceternals@gmail.com</a>
-                    </div>
-
-                    <div class="info-card">
-                        <div class="info-icon">📍</div>
-                        <h3>Location</h3>
-                        <p>E-100, Jeewan Park, Uttam Nagar, New Delhi - 110059, India</p>
-                        <a href="https://maps.app.goo.gl/cfJKi5iW6E18Kwmt6?g_st=ic" target="_blank" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">VIEW ON MAP</a>
-                    </div>
-
-                    <div class="info-card">
-                        <div class="info-icon">🕐</div>
-                        <h3>Hours</h3>
-                        <p>Monday - Saturday: 9:00 AM - 9:00 PM</p>
-                        <p>Sunday: 10:00 AM - 6:00 PM</p>
-                    </div>
-                </div>
-            </div>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="logo.png" alt="Evolution Dance Centre" width="120" height="105" loading="lazy">
+        <p>Delhi's premier dance academy offering world-class training in multiple dance forms.</p>
+        <div class="socials">
+          <a href="https://www.facebook.com/share/1BMeq9kMNm/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-facebook"/></svg></a>
+          <a href="https://www.instagram.com/evolutiondance_centre?igsh=aGJnZWt2N3cwN3Jk" target="_blank" rel="noopener" aria-label="Instagram"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-instagram"/></svg></a>
+          <a href="https://youtube.com/@edceternals-g3i?si=o3Gl9xt_s5TvM05G" target="_blank" rel="noopener" aria-label="YouTube"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-youtube"/></svg></a>
         </div>
-    </section>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="classes.html">CLASSES</a></li>
+          <li><a href="portfolio.html">PORTFOLIO</a></li>
+          <li><a href="wedding.html">WEDDING</a></li>
+          <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul class="f-contact">
+          <li><a href="tel:+919971711243"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg> Aakash: +91 99717 11243</a></li>
+          <li><a href="tel:+917678358116"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg> Naina: +91 76783 58116</a></li>
+          <li><a href="mailto:edceternals@gmail.com"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-mail"/></svg> edceternals@gmail.com</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Visit the studio</h4>
+        <p>E-100, Jeewan Park, Uttam Nagar, New Delhi - 110059, India</p>
+        <a class="btn btn-ghost btn-sm" href="https://maps.app.goo.gl/cfJKi5iW6E18Kwmt6?g_st=ic" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-pin"/></svg> View on map</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span data-year>2026</span> Evolution Dance Centre. All rights reserved.</p>
+      <p>Affiliated with <a href="https://sskalakendra.org" target="_blank" rel="noopener">Suro Bharti Sangeet Kala Kendra</a></p>
+    </div>
+  </div>
+</footer>
 
-    <section class="content-section" style="background: linear-gradient(135deg, rgba(255, 107, 0, 0.05), rgba(255, 165, 0, 0.05)); padding: 0;">
-        <div class="map-container">
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.0464826395716!2d77.04906931508052!3d28.62337098242089!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1b1b1b1b1b1b%3A0x1b1b1b1b1b1b1b1b!2sUttam%20Nagar%2C%20New%20Delhi%2C%20Delhi!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
-                allowfullscreen 
-                loading="lazy">
-            </iframe>
-        </div>
-    </section>
+<div class="fabs">
+  <button class="fab fab-top" id="toTop" type="button" aria-label="Back to top"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-arrow-up"/></svg></button>
+  <a class="fab fab-wa" href="https://wa.me/919971711243?text=Hi%20Evolution%20Dance%20Centre!" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg class="ic" aria-hidden="true" focusable="false"><use href="#i-whatsapp"/></svg></a>
+</div>
 
-    <section style="padding: 3rem 2rem; text-align: center;">
-        <div class="container">
-            <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">Follow Us on Social Media</h2>
-            <div class="social-links" style="justify-content: center;">
-                <a href="https://www.facebook.com/share/1BMeq9kMNm/?mibextid=wwXIfr" target="_blank" style="width: 60px; height: 60px; font-size: 1.5rem;">f</a>
-                <a href="https://www.instagram.com/evolutiondance_centre?igsh=aGJnZWt2N3cwN3Jk" target="_blank" style="width: 60px; height: 60px; font-size: 1.5rem;">📷</a>
-                <a href="https://youtube.com/@edceternals-g3i?si=o3Gl9xt_s5TvM05G" target="_blank" style="width: 60px; height: 60px; font-size: 1.5rem;">▶</a>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <img src="logo.png" alt="Evolution Dance Centre" class="footer-logo">
-                <p style="color: #999; margin-bottom: 1rem;">Delhi's premier dance academy offering world-class training in multiple dance forms.</p>
-                <div class="social-links">
-                    <a href="https://www.facebook.com/share/1BMeq9kMNm/?mibextid=wwXIfr" target="_blank">f</a>
-                    <a href="https://www.instagram.com/evolutiondance_centre?igsh=aGJnZWt2N3cwN3Jk" target="_blank">📷</a>
-                    <a href="https://youtube.com/@edceternals-g3i?si=o3Gl9xt_s5TvM05G" target="_blank">▶</a>
-                </div>
-            </div>
-            <div class="footer-col">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="classes.html">Classes</a></li>
-                    <li><a href="portfolio.html">Portfolio</a></li>
-                    <li><a href="wedding.html">Wedding Choreography</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>Contact Info</h3>
-                <ul>
-                    <li><a href="tel:+919971711243">Aakash: +91 99717 11243</a></li>
-                    <li><a href="tel:+917678358116">Naina: +91 76783 58116</a></li>
-                    <li><a href="mailto:edceternals@gmail.com">edceternals@gmail.com</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>Location</h3>
-                <p style="color: #999;">E-100, Jeewan Park, Uttam Nagar, New Delhi - 110059, India</p>
-                <a href="https://maps.app.goo.gl/cfJKi5iW6E18Kwmt6?g_st=ic" target="_blank" class="btn btn-primary" style="display: inline-block; margin-top: 1rem; padding: 0.7rem 1.5rem; font-size: 0.9rem;">VIEW ON MAP</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Evolution Dance Centre. All Rights Reserved.</p>
-            <p style="margin-top: 0.5rem;">Affiliated with <a href="https://sskalakendra.org" target="_blank" style="color: var(--primary);">Suro Bharti Sangeet Kala Kendra</a></p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
