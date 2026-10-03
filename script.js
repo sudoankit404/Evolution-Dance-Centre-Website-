@@ -1,235 +1,325 @@
-// ==========================================
-// EVOLUTION DANCE CENTRE - MAIN JAVASCRIPT
-// ==========================================
+/* ==========================================================
+   EVOLUTION DANCE CENTRE — site behaviour
+   Theme switch · mobile drawer · reveal-on-scroll · counters
+   filters · video modal · contact form
+   (the first-paint theme is set by a tiny inline script in <head>)
+   ========================================================== */
+(() => {
+  'use strict';
 
-// Mobile Menu Toggle
-function toggleMenu() {
-    const navLinks = document.getElementById('navLinks');
-    const hamburger = document.getElementById('hamburger');
-    navLinks.classList.toggle('active');
-    hamburger.classList.toggle('active');
-}
+  const root = document.documentElement;
+  const $ = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const raf = (fn) => { let t = false; return (...a) => { if (t) return; t = true; requestAnimationFrame(() => { t = false; fn(...a); }); }; };
 
-// Close mobile menu when clicking outside
-document.addEventListener('click', function(event) {
-    const navLinks = document.getElementById('navLinks');
-    const hamburger = document.getElementById('hamburger');
-    
-    if (navLinks && hamburger && !hamburger.contains(event.target) && !navLinks.contains(event.target)) {
-        navLinks.classList.remove('active');
-        hamburger.classList.remove('active');
+  /* ---------- Theme ---------- */
+  const KEY = 'edc-theme';
+  const themeColor = { dark: '#060e1d', light: '#f6faf1' };
+
+  function applyTheme(theme, animate) {
+    if (animate && !reduceMotion) {
+      root.classList.add('theme-anim');
+      clearTimeout(applyTheme.t);
+      applyTheme.t = setTimeout(() => root.classList.remove('theme-anim'), 650);
     }
-});
-
-// Close mobile menu when clicking on a link
-document.addEventListener('DOMContentLoaded', function() {
-    const navLinks = document.querySelectorAll('.nav-links a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            const navLinksContainer = document.getElementById('navLinks');
-            const hamburger = document.getElementById('hamburger');
-            if (navLinksContainer && hamburger) {
-                navLinksContainer.classList.remove('active');
-                hamburger.classList.remove('active');
-            }
-        });
+    root.setAttribute('data-theme', theme);
+    const meta = $('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', themeColor[theme]);
+    $$('[data-theme-toggle]').forEach((b) => {
+      b.setAttribute('aria-label', theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+      b.setAttribute('aria-pressed', theme === 'light' ? 'true' : 'false');
     });
-});
+  }
 
-// ==========================================
-// VIDEO FILTERING FUNCTION
-// ==========================================
-function filterVideos(category) {
-    const videos = document.querySelectorAll('.video-card');
-    const buttons = document.querySelectorAll('.filter-btn');
-    
-    // Update active button
-    buttons.forEach(btn => btn.classList.remove('active'));
-    event.target.classList.add('active');
-    
-    // Filter videos
-    videos.forEach(video => {
-        if (category === 'all' || video.dataset.category === category) {
-            video.style.display = 'block';
-        } else {
-            video.style.display = 'none';
+  applyTheme(root.getAttribute('data-theme') || 'dark', false);
+
+  $$('[data-theme-toggle]').forEach((btn) =>
+    btn.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(next, true);
+      try { localStorage.setItem(KEY, next); } catch (e) { /* private mode */ }
+    })
+  );
+
+  // Follow the OS setting until the visitor picks a theme themselves
+  const mq = window.matchMedia('(prefers-color-scheme: light)');
+  const onSystemChange = (e) => {
+    let saved = null;
+    try { saved = localStorage.getItem(KEY); } catch (err) { /* ignore */ }
+    if (!saved) applyTheme(e.matches ? 'light' : 'dark', true);
+  };
+  if (mq.addEventListener) mq.addEventListener('change', onSystemChange);
+
+  /* ---------- Mobile navigation drawer ---------- */
+  const navToggle = $('#navToggle');
+  const siteNav = $('#siteNav');
+  const scrim = $('#navScrim');
+
+  function setNav(open) {
+    if (!navToggle || !siteNav) return;
+    root.classList.toggle('nav-open', open);
+    navToggle.setAttribute('aria-expanded', String(open));
+    navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+  if (navToggle && siteNav) {
+    $$('.nl', siteNav).forEach((a, i) => a.style.setProperty('--i', i));
+    navToggle.addEventListener('click', () => setNav(!root.classList.contains('nav-open')));
+    scrim && scrim.addEventListener('click', () => setNav(false));
+    $$('a', siteNav).forEach((a) => a.addEventListener('click', () => setNav(false)));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && root.classList.contains('nav-open')) { setNav(false); navToggle.focus(); } });
+    window.matchMedia('(min-width: 961px)').addEventListener('change', (e) => { if (e.matches) setNav(false); });
+  }
+
+  /* ---------- Scroll: header state, progress bar, back-to-top, path ---------- */
+  const header = $('#header');
+  const bar = $('#progress');
+  const toTop = $('#toTop');
+  const paths = $$('.path');
+
+  const onScroll = raf(() => {
+    const y = window.scrollY;
+    header && header.classList.toggle('scrolled', y > 12);
+    if (bar) {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, y / max) : 0) + ')';
+    }
+    toTop && toTop.classList.toggle('show', y > 700);
+    paths.forEach((p) => {
+      const r = p.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const prog = Math.max(0, Math.min(1, (vh * 0.72 - r.top) / (r.height * 0.9)));
+      p.style.setProperty('--p', prog.toFixed(3));
+      const steps = $$('.path-step', p);
+      steps.forEach((s, i) => s.classList.toggle('on', prog > (steps.length === 1 ? 0 : i / (steps.length - 1)) - 0.001 && prog > 0.02));
+    });
+  });
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+  toTop && toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' }));
+
+  /* ---------- Reveal on scroll (+ stagger) ---------- */
+  $$('[data-stagger]').forEach((box) =>
+    $$(':scope > .reveal', box).forEach((el, i) => el.style.setProperty('--d', Math.min(i, 8) * 0.07 + 's'))
+  );
+  const revealEls = $$('.reveal');
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    revealEls.forEach((el) => io.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add('in'));
+  }
+
+  /* ---------- Count-up numbers ---------- */
+  function countUp(el) {
+    const end = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    if (reduceMotion || isNaN(end)) { el.textContent = end + suffix; return; }
+    const t0 = performance.now(), dur = 1500;
+    const tick = (t) => {
+      const k = Math.min(1, (t - t0) / dur);
+      const eased = 1 - Math.pow(1 - k, 3);
+      el.textContent = Math.round(end * eased) + suffix;
+      if (k < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+  const counters = $$('[data-count]');
+  if ('IntersectionObserver' in window) {
+    const co = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) { countUp(en.target); co.unobserve(en.target); } });
+    }, { threshold: 0.6 });
+    counters.forEach((c) => co.observe(c));
+  } else counters.forEach(countUp);
+
+  /* ---------- Card spotlight follows the pointer ---------- */
+  document.addEventListener('pointermove', raf((e) => {
+    const card = e.target.closest && e.target.closest('.card');
+    if (!card) return;
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', e.clientX - r.left + 'px');
+    card.style.setProperty('--my', e.clientY - r.top + 'px');
+  }), { passive: true });
+
+  /* ---------- Filters (classes + portfolio) ---------- */
+  $$('[data-filter-group]').forEach((group) => {
+    const items = $$(group.dataset.filterGroup);
+    const empty = $(group.dataset.empty || '');
+    const buttons = $$('[data-filter]', group);
+
+    buttons.forEach((b) => {
+      const n = b.dataset.filter === 'all' ? items.length : items.filter((i) => i.dataset.category === b.dataset.filter).length;
+      const small = $('small', b);
+      if (small) small.textContent = n;
+    });
+
+    function apply(value) {
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === value)));
+      let shown = 0;
+      items.forEach((it) => {
+        const match = value === 'all' || it.dataset.category === value;
+        if (match) shown++;
+        if (match && it.hidden) {
+          it.hidden = false;
+          it.classList.add('f-out');
+          requestAnimationFrame(() => requestAnimationFrame(() => it.classList.remove('f-out')));
+        } else if (!match && !it.hidden) {
+          it.classList.add('f-out');
+          setTimeout(() => { if (it.classList.contains('f-out')) it.hidden = true; }, reduceMotion ? 0 : 240);
         }
+      });
+      if (empty) empty.hidden = shown !== 0;
+    }
+    buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.filter)));
+    group._apply = apply;
+  });
+
+  // Deep link such as classes.html#breaking — make sure the card isn't filtered out
+  function revealHashTarget() {
+    if (!location.hash) return;
+    const target = $(location.hash.replace(/[^#\w-]/g, ''));
+    if (target && target.hidden) {
+      const g = $('[data-filter-group]');
+      if (g && g._apply) {
+        g._apply('all');
+        requestAnimationFrame(() => target.scrollIntoView({ block: 'start', behavior: reduceMotion ? 'auto' : 'smooth' }));
+      }
+    }
+  }
+  revealHashTarget();
+  window.addEventListener('hashchange', revealHashTarget);
+
+  /* ---------- Portfolio video modal ---------- */
+  const dlg = $('#videoDialog');
+  if (dlg && typeof dlg.showModal === 'function') {
+    const frame = $('.vd-frame', dlg);
+    const titleEl = $('#vdTitle', dlg);
+    const fallback = $('.vd-fallback', dlg);
+    let lastFocus = null;
+
+    const clearPlayer = () => {
+      $$('video, iframe', frame).forEach((n) => { if (n.pause) n.pause(); n.remove(); });
+      fallback.classList.remove('show');
+    };
+
+    function openVideo(btn) {
+      lastFocus = btn;
+      clearPlayer();
+      titleEl.textContent = btn.dataset.title || 'Video';
+      const yt = btn.dataset.yt;
+      if (yt) {
+        const f = document.createElement('iframe');
+        f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(yt) + '?autoplay=1&rel=0';
+        f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        f.allowFullscreen = true;
+        f.title = btn.dataset.title || 'Video';
+        frame.prepend(f);
+      } else {
+        const v = document.createElement('video');
+        v.controls = true; v.autoplay = true; v.playsInline = true; v.preload = 'metadata';
+        v.src = btn.dataset.src;
+        v.addEventListener('error', () => { v.remove(); fallback.classList.add('show'); });
+        frame.prepend(v);
+      }
+      dlg.showModal();
+      root.classList.add('modal-open');
+    }
+
+    $$('.thumb[data-src], .thumb[data-yt]').forEach((b) => b.addEventListener('click', () => openVideo(b)));
+    $$('[data-close-video]', dlg).forEach((b) => b.addEventListener('click', () => dlg.close()));
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+    dlg.addEventListener('close', () => {
+      clearPlayer();
+      root.classList.remove('modal-open');
+      lastFocus && lastFocus.focus();
     });
-}
+  }
 
-// ==========================================
-// VIDEO PLAYER FUNCTIONS (For Portfolio)
-// ==========================================
+  /* ---------- Contact form ---------- */
+  const form = $('#contactForm');
+  if (form) {
+    const PHONE_WA = '919971711243';
+    const TO = 'edceternals@gmail.com';
+    const f = {
+      name: $('#name'), email: $('#email'), phone: $('#phone'), subject: $('#subject'), message: $('#message'),
+    };
+    const success = $('#formSuccess');
+    const mailLink = $('#mailFallback');
+    const waLink = $('#waFallback');
 
-// Play video in fullscreen modal
-function playVideo(videoPath, videoTitle) {
-    const modal = document.getElementById('videoModal');
-    const modalVideo = document.getElementById('modalVideo');
-    const modalVideoSource = document.getElementById('modalVideoSource');
-    
-    if (modal && modalVideo && modalVideoSource) {
-        modalVideoSource.src = videoPath;
-        modalVideo.load();
-        modal.style.display = 'block';
-        modalVideo.play();
+    // Pre-fill from links like contact.html?subject=Trial%20Class&class=Hip%20Hop
+    const qs = new URLSearchParams(location.search);
+    const wantSubject = qs.get('subject');
+    if (wantSubject) {
+      const opt = Array.from(f.subject.options).find((o) => o.value.toLowerCase() === wantSubject.toLowerCase());
+      if (opt) f.subject.value = opt.value;
     }
-}
+    const pre = [];
+    if (qs.get('class')) pre.push("I'm interested in " + qs.get('class') + ' classes.');
+    if (qs.get('package')) pre.push("I'd like a quote for the " + qs.get('package') + ' wedding choreography package.');
+    if (pre.length && !f.message.value) f.message.value = pre.join(' ') + ' ';
 
-// Close video modal
-function closeVideoModal() {
-    const modal = document.getElementById('videoModal');
-    const modalVideo = document.getElementById('modalVideo');
-    
-    if (modal && modalVideo) {
-        modalVideo.pause();
-        modalVideo.currentTime = 0;
-        modal.style.display = 'none';
-    }
-}
-
-// Close modal when clicking outside video
-window.onclick = function(event) {
-    const modal = document.getElementById('videoModal');
-    if (event.target == modal) {
-        closeVideoModal();
-    }
-}
-
-// Close modal on Escape key
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        closeVideoModal();
-    }
-});
-
-// ==========================================
-// SMOOTH SCROLL FOR ANCHOR LINKS
-// ==========================================
-document.addEventListener('DOMContentLoaded', function() {
-    const anchorLinks = document.querySelectorAll('a[href^="#"]');
-    
-    anchorLinks.forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const targetId = this.getAttribute('href');
-            if (targetId !== '#') {
-                e.preventDefault();
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            }
-        });
+    const setErr = (el, msg) => {
+      const wrap = el.closest('.field');
+      wrap.classList.toggle('invalid', !!msg);
+      const e = $('.err', wrap);
+      if (e) e.textContent = msg || '';
+      el.setAttribute('aria-invalid', msg ? 'true' : 'false');
+      return !msg;
+    };
+    const rules = {
+      name: (v) => (v.trim().length < 2 ? 'Please enter your name.' : ''),
+      email: (v) => (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) ? '' : 'Please enter a valid email address.'),
+      phone: (v) => (!v.trim() || v.replace(/\D/g, '').length >= 10 ? '' : 'Please enter a 10-digit phone number.'),
+      subject: (v) => (v ? '' : 'Please choose a subject.'),
+      message: (v) => (v.trim().length < 10 ? 'Please write a short message (at least 10 characters).' : ''),
+    };
+    let attempted = false; // don't nag about empty fields until the first submit
+    Object.keys(rules).forEach((k) => {
+      f[k].addEventListener('blur', () => { if (attempted || f[k].value.trim()) setErr(f[k], rules[k](f[k].value)); });
+      f[k].addEventListener('input', () => { if (f[k].closest('.field').classList.contains('invalid')) setErr(f[k], rules[k](f[k].value)); });
     });
-});
 
-// ==========================================
-// NAVBAR SCROLL EFFECT
-// ==========================================
-window.addEventListener('scroll', function() {
-    const navbar = document.querySelector('nav');
-    if (navbar) {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    }
-});
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      attempted = true;
+      let firstBad = null;
+      Object.keys(rules).forEach((k) => { if (!setErr(f[k], rules[k](f[k].value)) && !firstBad) firstBad = f[k]; });
+      if (firstBad) { firstBad.focus(); return; }
 
-// ==========================================
-// FORM VALIDATION (Contact Page)
-// ==========================================
-document.addEventListener('DOMContentLoaded', function() {
-    const contactForm = document.querySelector('.contact-form form');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            // Basic validation
-            const name = document.getElementById('name');
-            const email = document.getElementById('email');
-            const subject = document.getElementById('subject');
-            const message = document.getElementById('message');
-            
-            let isValid = true;
-            
-            if (name && name.value.trim() === '') {
-                alert('Please enter your name');
-                isValid = false;
-            }
-            
-            if (email && email.value.trim() === '') {
-                alert('Please enter your email');
-                isValid = false;
-            }
-            
-            if (subject && subject.value === '') {
-                alert('Please select a subject');
-                isValid = false;
-            }
-            
-            if (message && message.value.trim() === '') {
-                alert('Please enter a message');
-                isValid = false;
-            }
-            
-            if (!isValid) {
-                e.preventDefault();
-            }
-        });
-    }
-});
+      const body =
+        'Name: ' + f.name.value.trim() + '\n' +
+        'Email: ' + f.email.value.trim() + '\n' +
+        (f.phone.value.trim() ? 'Phone: ' + f.phone.value.trim() + '\n' : '') +
+        '\n' + f.message.value.trim();
+      const subject = f.subject.value + ' — ' + f.name.value.trim();
+      const mailto = 'mailto:' + TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      const wa = 'https://wa.me/' + PHONE_WA + '?text=' + encodeURIComponent('Hi Evolution Dance Centre! (' + f.subject.value + ')\n\n' + body);
 
-// ==========================================
-// LAZY LOADING FOR IMAGES
-// ==========================================
-document.addEventListener('DOMContentLoaded', function() {
-    const images = document.querySelectorAll('img[data-src]');
-    
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.removeAttribute('data-src');
-                observer.unobserve(img);
-            }
-        });
+      mailLink.href = mailto;
+      waLink.href = wa;
+      success.classList.add('show');
+      success.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
+      window.location.href = mailto;
     });
-    
-    images.forEach(img => imageObserver.observe(img));
-});
+  }
 
-// ==========================================
-// PREVENT VIDEO AUTOPLAY ON PAGE LOAD
-// ==========================================
-document.addEventListener('DOMContentLoaded', function() {
-    const videos = document.querySelectorAll('video');
-    videos.forEach(video => {
-        video.pause();
-    });
-});
+  /* ---------- Prefetch internal pages on hover/touch for snappy navigation ---------- */
+  const prefetched = new Set();
+  const prefetch = (e) => {
+    const a = e.target.closest && e.target.closest('a[href$=".html"]');
+    if (!a || a.target === '_blank' || prefetched.has(a.href) || a.origin !== location.origin) return;
+    prefetched.add(a.href);
+    const l = document.createElement('link');
+    l.rel = 'prefetch'; l.href = a.href;
+    document.head.appendChild(l);
+  };
+  document.addEventListener('mouseover', prefetch, { passive: true });
+  document.addEventListener('touchstart', prefetch, { passive: true });
 
-// ==========================================
-// ACTIVE PAGE HIGHLIGHT IN NAVIGATION
-// ==========================================
-document.addEventListener('DOMContentLoaded', function() {
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    const navLinks = document.querySelectorAll('.nav-links a');
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === currentPage) {
-            link.classList.add('active');
-        }
-    });
-});
-
-// ==========================================
-// CONSOLE WELCOME MESSAGE
-// ==========================================
-console.log('%c🎭 Evolution Dance Centre', 'color: #ff6b00; font-size: 24px; font-weight: bold;');
-console.log('%cWebsite by Evolution Dance Centre', 'color: #ffa500; font-size: 14px;');
-console.log('%cVisit us: E-100, Jeewan Park, Uttam Nagar, New Delhi', 'color: #999;');
+  /* ---------- Footer year ---------- */
+  $$('[data-year]').forEach((n) => (n.textContent = new Date().getFullYear()));
+})();
